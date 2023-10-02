@@ -103,6 +103,19 @@ void exercise6() {
 	cout << "The sum is equal to " << sum;
 }
 
+void rangeBasedForLoop() {
+	// for(type/auto <x>: <collection>) { action };
+	const string names[] = { "Guilherme", "Isabela", "Churros" };
+	const int ages[] = { 19, 12, 7 };
+	for (string name : names) cout << name << endl;
+	cout << "---------------" << endl;
+	for (auto age : ages) cout << age << endl; // auto type deducer
+	cout << "---------------" << endl;
+	for (auto n : { 5,10,15 }) cout << n << endl;
+	cout << "---------------" << endl;
+	for (auto letter : "Guilherme") cout << letter << " " << flush;
+	cout << "\n---------------" << endl;
+}
 
 int main() {
 
@@ -112,6 +125,7 @@ int main() {
 	//exercise4();
 	//exercise5();
 	//ternary_condition();
-	exercise6();
+	//exercise6();
+	rangeBasedForLoop();
 	return 0;
 }
