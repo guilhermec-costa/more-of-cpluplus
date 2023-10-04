@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -117,6 +118,77 @@ void rangeBasedForLoop() {
 	cout << "\n---------------" << endl;
 }
 
+void whileLoops() {
+	bool correct{ false };
+	int number{ 0 };
+	while (!correct) {
+		cout << "Type a number greater than 100 > " << flush;
+		cin >> number;
+		if (number > 100) correct = true;
+	}
+	cout << "Finished!";
+}
+
+void whileLoopExercise() {
+	int start{ -105 };
+	const int end{ -97 };
+	vector<int> vec;
+	while (start <= end) {
+		vec.push_back(start);
+		++start;
+	}
+	for (int i : vec) cout << i << " " << flush;
+	int count{ 0 }, index{ 0 };
+	while (index < vec.size() && vec.at(index) != -99) {
+		count++, index++;
+
+	}
+	cout << endl;
+	cout << count << endl;
+}
+
+void doWhileLoop() {
+	int number{ 0 };
+	// bom em casos que pelo menos uma iteração deve ser feita
+	char option;
+	do {
+		cout << "Type a number: " << flush;
+		cin >> number;
+
+		cout << "Wish to type another number: " << endl;
+		cin >> option;
+	} while (option!='Q' && option!='q');
+}
+
+void infiniteLoop() {
+	// a condição é que seja sempre verdadeiro
+	while (true) {
+		cout << "Hello" << endl;
+	}
+}
+
+void nestedLoop() {
+	int items{ 0 };
+	cout << "How many items do you have? " << flush;
+	cin >> items;
+
+	vector<int> histogram;
+	for (int i = 1; i <= items; i++) {
+		int currentData{ 0 };
+		cout << "Enter data number " << i << ": " << flush;
+		cin >> currentData;
+
+		histogram.push_back(currentData);
+	}
+
+	for (auto v : histogram) {
+		for (int x{ 1 }; x <= v; x++) {
+			cout << (x % 5 == 0 ? "*" : "-") << flush;
+		}
+		cout << endl;
+	}
+}
+
 int main() {
 
 	//exercise1();
@@ -126,6 +198,11 @@ int main() {
 	//exercise5();
 	//ternary_condition();
 	//exercise6();
-	rangeBasedForLoop();
+	//rangeBasedForLoop();
+	//while_loops();
+	//whileLoopExercise();
+	//doWhileLoop();
+	//infiniteLoop();
+	nestedLoop();
 	return 0;
 }
