@@ -12,6 +12,8 @@ Arrays:
 -> tamanho fixo
 -> elementos todos do mesmo tipo
 -> Não tem exceção de out of bounds.
+-> O nome do array faz referência a localização na memória do primeiro elemento do array.
+
 Formas de inicializar:
 1: int x[] = {1,2,3}; tamanho indefinido + inicialização
 2: int x[3] = {1,2,3}; tamanho definido + inicialização

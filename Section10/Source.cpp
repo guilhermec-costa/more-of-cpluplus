@@ -118,11 +118,19 @@ void cppStrings() {
 	string name1; // é inicializado automaticamente para ""
 	string name2{ "Guilherme" , 5};
 	string name3; name3.assign("Isabela");
+
+	// (string, start_index, counter)
 	string name4{ "Edson", 0, 2 };
+
+	// (counter, texto para iniciar)
 	string name5(5, 'X');
 	string name6();
+	
+	// cópia de objeto
 	string name7(name4);
 	string name8("Churros");
+
+	// (string)
 	string name9("Shoyou");
 	cout << "Name 4: " << name4 << endl;
 	cout << "Name 3: " << name3 << endl;
@@ -131,13 +139,109 @@ void cppStrings() {
 	cout << "Name 8: " << name8 << endl;
 
 	name9 = "Shoyou folgado!";
-	//concatenation
+
+	//concatenation. x + y
 	cout << "My two dogs: " << name8 + " and " + name9 << endl;
 	//string sentence = "Hello" + "World"; Ilegal. "Hello" + "World" são c-style literals, não objetos string
 	// não é possível atribuir a uma string a concatenção de dois literals.
 	// mas de uma string com um literal é possível
 	string sentence = name8 + " Augusto";
 	cout << sentence << endl;
+	cout << "--------------" << endl;
+	for (char c : name8) {
+		cout << c << endl;
+	}
+	cout << "--------------" << endl;
+	char churros[10]{ "Churros" };
+	cout << (name8 == churros) << endl;
+	cout << (name8 == "Churros") << endl;
+	// é possível comparar strings c++ com strings C-style
+	cout << (name8 < "CHURROS") << endl; // compara lexicalmente as strings, segundo a ordem na tabela ASCII
+	cout << (name8 < "churros") << endl;
+}
+
+void stringMethods() {
+	string s(10, 'X');
+	string ss(10, 'X');
+	cout << "String s: " << s << endl;
+	string s1("A test string string2");
+	// obj.substr(start_index, count)
+	// retorna uma substring conforme os ranges
+	cout << s1.substr(0, 6) << flush; // pos inicial, qtd de caracteres a percorrer
+	cout << s1.substr(6, 7) << endl;
+
+	// obj.find(string, pos_inicial:opcional). Retorna o índice da primeira substring que aparece segundo o argumento
+
+	cout << "First position of ocurrency \"test\": " << s1.find("test", 1) << endl;
+	cout << "First position of ocurrency of \"string\": " << s1.find("string", 0) << endl;
+	cout << "First position of ocurrency of \"string\" from 12th position: " << s1.find("string", 12) << endl;
+	cout << "First position of ocurrency of \"string\" from last position: " << s1.rfind("string") << endl;
+	cout << "First position of ocurrency of \"est\" from last position: " << s1.rfind("est") << endl;
+
+	// obj.erase(start_index, count). Apaga da string a qtd especifica, a partir da posição especificada
+	// efetiva a deleção realmente. Não é só visual
+	cout << s1.erase(6, 20) << endl;
+
+	cout << "Length of the string \"" << s1 << "\": " << s1.length() << endl;
+
+	// deleta todos os caracteres da string
+	s1.clear();
+	cout << "S1 after clear: " << s1 << endl;
+	string s2;
+	cout << "Type anything: " << flush;
+	// essa função é da lib string do c++, mas funciona com strings, e lê a linha inteira, como o getline
+	// sem ela, se usar o cin, strings com espaços não serão lidas completamente também
+	getline(cin, s2);
+	cout << "You typed \"" << s2 << "\"." << endl;
+	string s3;
+	cout << "Type another text. It you read until you type \"X\": " << flush;
+	// terceiro elemento é o delimitador. Irá parar de ler nesse quando encontrar este caracter
+	getline(cin, s3, 'X'); // para quando encontra \n (enter)
+	cout << "So, you typed " << s3 << endl;
+	cout << s << " is equal to XXXXXXXXXX: "  << (s == ss) << endl;
+	cout << "s2 at the position 3 (at notation): " << s2.at(3) << endl;
+	cout << "s2 at the position 3 (square brackets notation): " << s2[3] << endl;
+	cout << "Concataning s2 with 'XXXXX':  " << s2 + "XXXXXX" << endl;
+	cout << "Iterating over s2 with for-each loop: " << endl;
+	for (auto letter : s2) cout << letter << endl;
+	cout << "-----------------------------" << endl;
+	cout << "Iteraing over s2, with conventional for loop" << endl;
+	for (size_t pos{ 0 }; pos < s2.length(); pos++) cout << s2.at(pos) << endl;
+	cout << "-----------------------------" << endl;
+}
+
+void simpleExercise() {
+	string secret("This is the secret sentece");
+	cout << "Type any word you think it is in the secret sentence: " << flush;
+
+	string text;
+	getline(cin, text);
+
+	size_t position = secret.find(text);
+	if (position != string::npos) {
+		cout << "Word \"" << text << "\" found at position " << position;
+	} else {
+		cout << "Word not found.";
+	}
+	
+}
+
+void exercise2() {
+	string unformattedFullname;
+	cout << "Type your fullname, but with no spaces, and capital letter at each subname" << endl;
+	cout << "--> " << flush;
+	getline(cin, unformattedFullname);
+	string formattedFullname(unformattedFullname);
+
+	for (size_t letter{ 0 }; letter < unformattedFullname.length(); ++letter) {
+		if (isupper(unformattedFullname.at(letter)) && letter>0) {
+			formattedFullname.insert(letter, " ");
+		}
+	}
+
+	cout << formattedFullname << endl;
+	char name[6] = "Larry";
+	cout << name << endl;
 }
 
 int main() {
@@ -145,6 +249,9 @@ int main() {
 	//charFunctions();
 	//cStyleStringPractice();
 	//exercise1();
-	cppStrings();
+	//cppStrings();
+	//stringMethods();
+	//simpleExercise();
+	exercise2();
 	return 0;
 }
