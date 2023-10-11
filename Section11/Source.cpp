@@ -9,6 +9,8 @@ Parâmetros reais: parâmetros usados na chamada da função, são os argumentos
 
 
 O argumento ser passado por valor ou por referência, é definido na função
+Por valor: uma cópia do parâmetro real é copiada para o parâmetro formal.
+Por referência: o parâmetro real se torna igual ao parâmetro formal em endereço de memória. Não há cópia
 */
 
 #include <cmath>
@@ -95,6 +97,39 @@ void arraysToFunctions() {
 	print(arr, _SIZE);
 }
 
+void arrayPassByValeuExercise() {
+	string guests[]{ "Churros", "Shoyou", "Getulio" };
+	const size_t NUMBER_OF_MEMBERS = sizeof(guests) / sizeof(string);
+	printGuestList(guests, NUMBER_OF_MEMBERS);
+	clearGuestList(guests, NUMBER_OF_MEMBERS);
+	printGuestList(guests, NUMBER_OF_MEMBERS);
+}
+
+void arrayPassByReferenceExercise() {
+	vector<string> names{ "Churros", "Shoyou", "Getulio" };
+	cout << "Before function calling: " << endl;
+	printGuestList(names);
+	clearGuestList(names);
+	cout << "\nAfter function calling: " << endl;
+	printGuestList(names);
+}
+
+void addNum(int &x, const int &y) { x += y; }
+void passByReference() {
+	/*
+	reference: forma de passar uma variável como parâmetro, sem criar uma cópia dela.
+	É um alias do parâmetro real
+	A variável é passada diretamente em seu endereço de memória. Portanto, ela é modificada diretamente em seu end.
+	O parâmetro real se torna o mesmo que o parâmetro formal.
+	Muito útil quando se passa arrays por referência, pois economiza memória e processamento 
+	*/
+	int num{ 5 };
+	cout << "Number is now " << num << endl;
+	int toAdd{ 10 };
+	addNum(num, toAdd);
+	cout << "After passed by reference, number is now " << num;
+	return;
+}
 
 int main() {
 	//string name{ "Churros" };
@@ -126,7 +161,10 @@ int main() {
 	//cout << "The sum of integers is " << intSum << endl;
 	//print("Hello world"); // a função exige string, mas aceita C-Style string
 	//exercise2();
-	arraysToFunctions();
+	//arraysToFunctions();
+	//arrayPassByValeuExercise();
+	//passByReference();
+	arrayPassByReferenceExercise();
 	return 0;
 }
 
